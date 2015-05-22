@@ -23,5 +23,4 @@ describe('Store', function() {
     browser.get('http://localhost:3000')
     expect(element(by.id('category')).getText()).toEqual('Women\'s Footwear');
   });
-
 });
