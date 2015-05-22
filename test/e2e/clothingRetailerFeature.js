@@ -23,4 +23,8 @@ describe('Store', function() {
     browser.get('http://localhost:3000')
     expect(element(by.id('category')).getText()).toEqual('Women\'s Footwear');
   });
+
+  it('only displays a buy button when an item is in stock', function() {
+    browser.get('http://localhost:3000')
+  });
 });

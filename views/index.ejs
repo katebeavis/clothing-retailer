@@ -12,10 +12,22 @@
   <script src="public/controllers/storeController.js"></script>
 </head>
 <body ng-controller="storeController as store">
-  <div id="clothing" ng-repeat="product in store.products">
-    <div id="name">{{product.name}}</div>
-    <div id="price">{{product.price | currency:'£' }}</div>
-    <div id="category">{{product.category }}</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Clothes List</div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Category</th>
+    </tr>
+    <tr id="clothing" ng-repeat="product in store.products">
+      <td id="name">{{product.name}}</td>
+      <td id="price">{{product.price | currency:'£' }}</td>
+      <td id="category">{{product.category }}</td>
+      <td><button ng-show="product.inStock">Add to basket</button><button ng-show="product.soldOut">Sold out</button></td>
+    </tr>
+  </table>
   </div>
+</div>
 </body>
 </html>

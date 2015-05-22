@@ -19,8 +19,8 @@ module.exports = function(config) {
       'public/bower_components/angular-route/angular-route.js',
       'public/bower_components/angular-resource/angular-resource.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
-      'public/app.js',
-      'public/controllers/storeController.js',
+      'public/*.js',
+      'public/controllers/*.js',
       'test/*.spec.js'
     ],
 
