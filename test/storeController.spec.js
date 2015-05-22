@@ -14,4 +14,8 @@ describe('storeController', function() {
   it('has item names', function() {
     expect(ctrl.products[0].name).toEqual('shoe')
   });
+
+  it('has item prices', function() {
+    expect(ctrl.products[0].price).toEqual(2.50);
+  });
 });
