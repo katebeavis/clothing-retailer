@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="store">
 <head>
   <meta charset="utf-8">
   <title>Clothing Retailer</title>
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="public/bower_components/jquery/dist/jquery.js"></script>
+  <script src="public/bower_components/angular/angular.js"></script>
+  <script src="public/bower_components/angular-resource/angular-resource.js"></script>
+  <script src="public/app.js"></script>
+  <script src="public/controllers/storeController.js"></script>
 </head>
-<body>
-  Hi
+<body ng-controller="storeController as store">
+  <div id="clothing" ng-repeat="product in store.products">
+    <p>{{product.name}}</p>
+    <p>{{product.price}}</p>
+  </div>
 </body>
 </html>
