@@ -25,8 +25,24 @@ describe('Store', function() {
 
   it('can sort items by price', function() {
     expect(element.all(by.id('price')).get(0).getText()).toEqual('£30.00');
-    element(by.linkText('%')).
-    click();
+    element(by.linkText('%'))
+    .click();
     expect(element.all(by.id('price')).get(0).getText()).toEqual('£19.00');
   });
+
+  it('displays a basket total of 0 when initialised', function() {
+    expect(element(by.id('basket')).getText()).toEqual('0');
+  });
+
+  it('displays an item in the basket when it has been added', function() {
+    element(by.buttonText('Add to basket'))
+    .click();
+    expect(element(by.id('basket-contents')).getText()).toEqual('Cotton Shorts, Medium Red');
+  });
+
+  // it('displays an item in the basket when it has been added', function() {
+  //   element(by.buttonText('Add to basket'))
+  //   .click();
+  //   expect(element(by.id('basket')).getText()).toEqual('30.00');
+  // });
 });

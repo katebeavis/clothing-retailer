@@ -19,7 +19,7 @@ app.controller('storeController', function() {
   this.products = items;
   this.basket = [];
   this.basketTotal = 0;
-  console.log();
+  console.log(this.basket);
 
   this.addToBasket = function(item) {
     if (item.inStock === true) {

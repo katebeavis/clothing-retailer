@@ -62,7 +62,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
 
-  <li role="presentation" class="active"><a href="#">Basket <span class="badge glyphicon glyphicon-shopping-cart">42</span></a></li>
+  <li role="presentation" class="active"><a href="#">Basket <span id="basket" class="badge glyphicon glyphicon-shopping-cart">{{store.basketTotal}}</span></a></li>
 
         </li>
       </ul>
@@ -80,9 +80,16 @@
       <td id="name">{{ product.name }}</td>
       <td id="price">{{ product.price | currency:'£' }}</td>
       <td id="category">{{ product.category }}</td>
-      <td><button ng-show="product.inStock">Add to basket</button><button ng-show="product.soldOut">Sold out</button></td>
+      <td><button ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</button><button ng-show="product.soldOut">Sold out</button></td>
     </tr>
   </table>
+</div>
+<div>
+  <h4>Basket</h4>
+  <ul>
+    <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
+    <li>Total:</li>
+  </ul>
 </div>
 </body>
 </html>
