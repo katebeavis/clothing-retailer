@@ -1,6 +1,6 @@
 describe('Store', function() {
   beforeEach(function() {
-    browser.get('http://localhost:3000')
+    browser.get('http://localhost:3000');
   });
 
   it ('has a title', function() {

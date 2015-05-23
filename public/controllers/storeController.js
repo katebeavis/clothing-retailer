@@ -17,5 +17,14 @@ app.controller('storeController', function() {
   ];
 
   this.products = items;
+  this.basket = [];
+  this.basketTotal = 0;
+  console.log();
+
+  this.addToBasket = function(item) {
+    if (item.inStock === true) {
+    this.basket.push(item);
+    }
+  };
 
 });
