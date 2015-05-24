@@ -17,6 +17,11 @@ describe('storeController', function() {
                      stock: 0,
                      inStock: false,
                      soldOut: true };
+    ctrl.itemThree = { name: 'Cotton Shorts, Medium Red',
+                     category: 'Women\'s Casualwear',
+                     price: 30.00,
+                     stock: 5,
+                     inStock: true };
     }));
 
   it('initialises with a list of items of clothing', function() {
@@ -50,5 +55,16 @@ describe('storeController', function() {
   it('can add an item to the basket', function() {
     ctrl.addToBasket(ctrl.itemOne);
     expect(ctrl.basket).toEqual([ctrl.itemOne]);
+  });
+
+  it('can set the basket total to the correct amount', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    expect(ctrl.basketTotal).toEqual(99.00);
+  });
+
+  it('can set the basket total to the correct amount when multiple items are added', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.addToBasket(ctrl.itemThree);
+    expect(ctrl.basketTotal).toEqual(129.00);
   });
 });

@@ -19,12 +19,22 @@ app.controller('storeController', function() {
   this.products = items;
   this.basket = [];
   this.basketTotal = 0;
-  console.log(this.basket);
 
   this.addToBasket = function(item) {
     if (item.inStock === true) {
     this.basket.push(item);
+    this.basketTotal = this.currentbasketTotal();
     }
   };
+
+  this.currentbasketTotal = function() {
+    return this.basket.map(function(item) {
+      return (item.price);
+    }).reduce(function(a, b) {
+      return a + b;
+    });
+  };
+
+
 
 });
