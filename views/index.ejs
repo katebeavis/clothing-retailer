@@ -62,7 +62,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
 
-  <li role="presentation" class="active"><a href="#">Basket <span id="basket" class="badge glyphicon glyphicon-shopping-cart">{{store.basketTotal}}</span></a></li>
+  <li role="presentation" class="active"><a href="#">Basket <span id="nav-basket" class="badge glyphicon glyphicon-shopping-cart">{{store.basketTotal | currency:'£'}}</span></a></li>
 
         </li>
       </ul>
@@ -88,7 +88,7 @@
   <h4>Basket</h4>
   <ul>
     <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
-    <li>Total:</li>
+    <li id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</li>
   </ul>
 </div>
 </body>

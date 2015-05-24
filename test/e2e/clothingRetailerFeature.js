@@ -30,8 +30,30 @@ describe('Store', function() {
     expect(element.all(by.id('price')).get(0).getText()).toEqual('£19.00');
   });
 
+  // NAV BASKET
+
   it('displays a basket total of 0 when initialised', function() {
-    expect(element(by.id('basket')).getText()).toEqual('0');
+    expect(element(by.id('nav-basket')).getText()).toEqual('£0.00');
+  });
+
+  it('it displays the correct basket total when an item has been added', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    expect(element(by.id('nav-basket')).getText()).toEqual('£30.00');
+  });
+
+  it('it displays the correct basket total when multiple items have been added', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    element.all(by.buttonText('Add to basket')).get(1)
+    .click();
+    expect(element(by.id('nav-basket')).getText()).toEqual('£129.00');
+  });
+
+  // BASKET
+
+  it('displays a basket total of 0 when initialised', function() {
+    expect(element(by.id('basket-total')).getText()).toEqual('Total: £0.00');
   });
 
   it('displays an item in the basket when it has been added', function() {
@@ -43,7 +65,7 @@ describe('Store', function() {
   it('it displays the correct basket total when an item has been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
-    expect(element(by.id('basket')).getText()).toEqual('30');
+    expect(element(by.id('basket-total')).getText()).toEqual('Total: £30.00');
   });
 
   it('it displays the correct basket total when multiple items have been added', function() {
@@ -51,6 +73,6 @@ describe('Store', function() {
     .click();
     element.all(by.buttonText('Add to basket')).get(1)
     .click();
-    expect(element(by.id('basket')).getText()).toEqual('129');
+    expect(element(by.id('basket-total')).getText()).toEqual('Total: £129.00');
   });
 });
