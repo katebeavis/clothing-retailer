@@ -35,14 +35,22 @@ describe('Store', function() {
   });
 
   it('displays an item in the basket when it has been added', function() {
-    element(by.buttonText('Add to basket'))
+    element.all(by.buttonText('Add to basket')).get(0)
     .click();
     expect(element(by.id('basket-contents')).getText()).toEqual('Cotton Shorts, Medium Red');
   });
 
-  // it('displays an item in the basket when it has been added', function() {
-  //   element(by.buttonText('Add to basket'))
-  //   .click();
-  //   expect(element(by.id('basket')).getText()).toEqual('30.00');
-  // });
+  it('it displays the correct basket total when an item has been added', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    expect(element(by.id('basket')).getText()).toEqual('30');
+  });
+
+  it('it displays the correct basket total when multiple items have been added', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    element.all(by.buttonText('Add to basket')).get(1)
+    .click();
+    expect(element(by.id('basket')).getText()).toEqual('129');
+  });
 });
