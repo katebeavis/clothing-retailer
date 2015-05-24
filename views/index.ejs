@@ -69,6 +69,9 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="alert" ng-show="store.errorMessage">
+  <h3>Minimum spend not met</h3>
+</div>
 <div class="panel panel-default">
   <table class="table table-bordered table-hover">
     <tr>
@@ -89,6 +92,7 @@
   <ul>
     <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
     <li id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</li>
+    <button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button>
   </ul>
 </div>
 </body>

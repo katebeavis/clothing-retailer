@@ -22,6 +22,8 @@ describe('storeController', function() {
                      price: 30.00,
                      stock: 5,
                      inStock: true };
+    ctrl.itemTest = { price: 1
+                    };
     }));
 
   it('initialises with a list of items of clothing', function() {
@@ -66,5 +68,22 @@ describe('storeController', function() {
     ctrl.addToBasket(ctrl.itemOne);
     ctrl.addToBasket(ctrl.itemThree);
     expect(ctrl.basketTotal).toEqual(129.00);
+  });
+
+  it('can apply a £5 voucher to the order', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFiveVoucher(ctrl.basketTotal);
+    expect(ctrl.basketTotal).toEqual(94.00);
+  });
+
+  it('can only apply a £5 voucher if the total is more than £5', function() {
+    ctrl.addToBasket(ctrl.itemTest);
+    expect(function() {
+      ctrl.applyFiveVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
+  });
+
+  xit('will only let a £5 voucher be applied once', function() {
+
   });
 });

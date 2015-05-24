@@ -36,13 +36,13 @@ describe('Store', function() {
     expect(element(by.id('nav-basket')).getText()).toEqual('£0.00');
   });
 
-  it('it displays the correct basket total when an item has been added', function() {
+  it('displays the correct basket total when an item has been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
     expect(element(by.id('nav-basket')).getText()).toEqual('£30.00');
   });
 
-  it('it displays the correct basket total when multiple items have been added', function() {
+  it('displays the correct basket total when multiple items have been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
     element.all(by.buttonText('Add to basket')).get(1)
@@ -62,17 +62,33 @@ describe('Store', function() {
     expect(element(by.id('basket-contents')).getText()).toEqual('Cotton Shorts, Medium Red');
   });
 
-  it('it displays the correct basket total when an item has been added', function() {
+  it('displays the correct basket total when an item has been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £30.00');
   });
 
-  it('it displays the correct basket total when multiple items have been added', function() {
+  it('displays the correct basket total when multiple items have been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
     element.all(by.buttonText('Add to basket')).get(1)
     .click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £129.00');
+  });
+
+  // VOUCHERS
+
+  it('displays the correct total after a £5 voucher has been applied', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    element(by.buttonText('£5.00 voucher'))
+    .click();
+    expect(element(by.id('basket-total')).getText()).toEqual('Total: £25.00');
+  });
+
+  it('displays an error when £5 minimum spend criteria has not been met', function() {
+    element.all(by.buttonText('£5.00 voucher'))
+    .click();
+    expect(element(by.css('div.alert')).isDisplayed()).toBeTruthy();
   });
 });

@@ -19,6 +19,8 @@ app.controller('storeController', function() {
   this.products = items;
   this.basket = [];
   this.basketTotal = 0;
+  fiveVoucherMinSpend = 5;
+  this.errorMessage = false;
 
   this.addToBasket = function(item) {
     if (item.inStock === true) {
@@ -33,6 +35,15 @@ app.controller('storeController', function() {
     }).reduce(function(a, b) {
       return a + b;
     });
+  };
+
+  this.applyFiveVoucher = function(basketTotal) {
+    if (basketTotal < fiveVoucherMinSpend) {
+      this.errorMessage = true;
+      throw new Error ();
+    } else {
+    this.basketTotal = basketTotal - 5;
+    }
   };
 
 
