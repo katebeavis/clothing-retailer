@@ -1,93 +1,95 @@
-app.controller('storeController', function() {
+app.controller('storeController', ['$http', '$scope', function($http, $scope) {
 
-  var items = [
-    { name: 'Almond Toe Court Shoes, Patent Black', category: 'Women\'s Footwear', price: 99.00, stock: 5, inStock: true },
-    { name: 'Suede Shoes, Blue', category: 'Women\'s Footwear', price: 42.00, stock: 4, inStock: true },
-    { name: 'Leather Driver Saddle Loafers, Tan', category: 'Men\'s Footwear', price: 34.00, stock: 12, inStock: true },
-    { name: 'Flip Flops, Red', category: 'Men\'s Footwear', price: 219.00, stock: 6, inStock: true },
-    { name: 'Flip Flops, Blue', category: 'Men\'s Footwear', price: 19.00, stock: 0, inStock: false, soldOut: true },
-    { name: 'Gold Button Cardigan, Black', category: 'Women\'s Casualwear', price: 167.00, stock: 6, inStock: true },
-    { name: 'Cotton Shorts, Medium Red', category: 'Women\'s Casualwear', price: 30.00, stock: 5, inStock: true },
-    { name: 'Fine Stripe Short Sleeve Shirt, Grey', category: 'Men\'s Casualwear', price: 49.99, stock: 9, inStock: true },
-    { name: 'Fine Stripe Short Sleeve Shirt, Green', category: 'Men\'s Casualwear', price: 39.99, stock: 3, inStock: true },
-    { name: 'Sharkskin Waistcoat, Charcoal', category: 'Men\'s Casualwear', price: 75.00, stock: 2, inStock: true },
-    { name: 'Lightweight Patch Pocket Blazer, Deer', category: 'Men\'s Casualwear', price: 175.00, stock: 1, inStock: true },
-    { name: 'Bird Print Dress, Black', category: 'Women\'s Casualwear', price: 270.00, stock: 10, inStock: true },
-    { name: 'Mid Twist Cut-Out Dress, Pink', category: 'Women\'s Casualwear', price: 540.00, stock: 5, inStock: true }
-  ];
+  $http.get('./public/products/products.json').success(function(data) { $scope.products = data; console.log($scope.products) })
+                                              .error(function() {
+                                                  //Error
+                                                  alert('error/failed');
+                                              });
 
-  this.products = items;
-  this.basket = [];
-  this.basketTotal = 0;
+
+  //   var items =  [
+  //   {"name": "Almond Toe Court Shoes, Patent Black",
+  //   "category": "Women's Footwear",
+  //   "price": 99.00,
+  //   "stock": 5,
+  //   "inStock": true
+
+  // }];
+  // $scope.products = items;
+  $scope.basket = [];
+  $scope.basketTotal = 0;
   var fiveVoucherMinSpend = 5;
   var tenVoucherSpend = 50;
-  this.errorMessage = false;
-  this.voucherError = false;
-  this.voucherApplied = false;
+  $scope.errorMessage = false;
+  $scope.voucherError = false;
+  $scope.voucherApplied = false;
+  console.log($scope.products)
 
-  this.addToBasket = function(item) {
+
+
+  $scope.addToBasket = function(item) {
     if (item.inStock === true) {
-    this.basket.push(item);
-    this.basketTotal = this.currentbasketTotal();
+    $scope.basket.push(item);
+    $scope.basketTotal = $scope.currentbasketTotal();
     }
   };
 
-  this.currentbasketTotal = function() {
-    return this.basket.map(function(item) {
+  $scope.currentbasketTotal = function() {
+    return $scope.basket.map(function(item) {
       return (item.price);
     }).reduce(function(a, b) {
       return a + b;
     });
   };
 
-  this.applyFiveVoucher = function(basketTotal) {
+  $scope.applyFiveVoucher = function(basketTotal) {
     if (basketTotal < fiveVoucherMinSpend) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+      $scope.errorMessage = true;
+    } else if ($scope.voucherApplied === true) {
+      $scope.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 5;
-      this.voucherApplied = true;
+      $scope.basketTotal = basketTotal - 5;
+      $scope.voucherApplied = true;
     }
   };
 
-  this.applyTenVoucher = function(basketTotal) {
+  $scope.applyTenVoucher = function(basketTotal) {
     if (basketTotal <= tenVoucherSpend) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+      $scope.errorMessage = true;
+    } else if ($scope.voucherApplied === true) {
+      $scope.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 10;
-      this.voucherApplied = true;
+      $scope.basketTotal = basketTotal - 10;
+      $scope.voucherApplied = true;
     }
   };
 
-  this.applyFifteenVoucher = function(basketTotal) {
-    if (basketTotal <= 75 || this.hasFootwear()) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+  $scope.applyFifteenVoucher = function(basketTotal) {
+    if (basketTotal <= 75 || $scope.hasFootwear()) {
+      $scope.errorMessage = true;
+    } else if ($scope.voucherApplied === true) {
+      $scope.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 15;
-      this.voucherApplied = true;
+      $scope.basketTotal = basketTotal - 15;
+      $scope.voucherApplied = true;
     }
   };
 
-  this.hasFootwear = function() {
-   if (this.itemCategory().indexOf('Footwear') > -1) {
+  $scope.hasFootwear = function() {
+   if ($scope.itemCategory().indexOf('Footwear') > -1) {
     return false;
    } else {
     return true;
    }
   };
 
-  this.itemCategory = function() {
-    return (this.basket.map(function(item) {
+  $scope.itemCategory = function() {
+    return ($scope.basket.map(function(item) {
       return (item.category.split(' ').pop());
     }));
   };
 
-});
+}]);
 
 
 
