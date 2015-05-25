@@ -70,7 +70,10 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="alert" ng-show="store.errorMessage">
-  <h3>Minimum spend not met</h3>
+  <h3>Voucher not valid</h3>
+</div>
+<div class="alert" ng-show="store.voucherError">
+  <h3>Voucher already used</h3>
 </div>
 <div class="panel panel-default">
   <table class="table table-bordered table-hover">
@@ -93,6 +96,8 @@
     <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
     <li id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</li>
     <button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button>
+    <button class="btn btn-default fifty-voucher" ng-click="store.applyFiftyVoucher(store.basketTotal)">£10.00 voucher</button>
+    <button class="btn btn-default fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button>
   </ul>
 </div>
 </body>

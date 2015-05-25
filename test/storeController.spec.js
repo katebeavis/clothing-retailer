@@ -22,6 +22,12 @@ describe('storeController', function() {
                      price: 30.00,
                      stock: 5,
                      inStock: true };
+    ctrl.itemFour = { name: 'Leather Driver Saddle Loafers, Tan',
+                      category: 'Men\'s Footwear',
+                      price: 34.00,
+                      stock: 12,
+                      inStock: true
+                    };
     ctrl.itemTest = { price: 1
                     };
     }));
@@ -76,14 +82,60 @@ describe('storeController', function() {
     expect(ctrl.basketTotal).toEqual(94.00);
   });
 
-  it('can only apply a £5 voucher if the total is more than £5', function() {
+  it('cannot apply a £5 voucher if the total is not more than £5', function() {
     ctrl.addToBasket(ctrl.itemTest);
     expect(function() {
       ctrl.applyFiveVoucher(ctrl.basketTotal);
     }).toThrow(new Error());
   });
 
-  xit('will only let a £5 voucher be applied once', function() {
+  it('will only let a £5 voucher be applied once', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFiveVoucher(ctrl.basketTotal);
+    expect(function() {
+      ctrl.applyFiveVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
+  });
 
+  it('can apply a £10 voucher when more than £50 has been spent', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    expect(ctrl.basketTotal).toEqual(89.00);
+  });
+
+  it('cannot apply a £10 voucher if the total is not more than £50', function() {
+    ctrl.addToBasket(ctrl.itemTwo);
+    expect(function() {
+      ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
+  });
+
+  it('will only let a £10 voucher be applied once', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    expect(function() {
+      ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
+  });
+
+  it('can apply a £15 voucher to the order', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    expect(ctrl.basketTotal).toEqual(84.00);
+  });
+
+  it('cannot apply a £15 voucher if the total is not more than £75', function() {
+    ctrl.addToBasket(ctrl.itemThree);
+    expect(function() {
+      ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
+  });
+
+  it('cannot apply a £15 voucher if the category is not footwear', function() {
+    ctrl.addToBasket(ctrl.itemThree);
+    ctrl.addToBasket(ctrl.itemFour);
+    expect(function() {
+      ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    }).toThrow(new Error());
   });
 });
