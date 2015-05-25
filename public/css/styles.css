@@ -39,3 +39,19 @@
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: white;
 }
+
+.image {
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+div.thumbnail {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+ul {
+   list-style: none;
+}

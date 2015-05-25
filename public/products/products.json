@@ -86,7 +86,7 @@
     "category": "Men's Casualwear",
     "price": 175.00,
     "stock": 1,
-    "image": "public/imgs/deer_patch.jpg",
+    "image": "public/imgs/deer_patch.jpeg",
     "inStock": true
   },
   {
@@ -94,7 +94,7 @@
     "category": "Women's Casualwear",
     "price": 270.00,
     "stock": 10,
-    "image": "public/imgs/bird_dress.jpg",
+    "image": "public/imgs/bird_dress.jpeg",
     "inStock": true
   },
   {
@@ -102,7 +102,7 @@
     "category": "Women's Casualwear",
     "price": 540.00,
     "stock": 5,
-    "image": "public/imgs/pink_dress.jpg",
+    "image": "public/imgs/pink_dress.jpeg",
     "inStock": true
   }
 ]

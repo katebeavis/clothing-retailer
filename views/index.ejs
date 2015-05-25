@@ -31,18 +31,6 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Women's <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Men's</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -52,15 +40,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
+
 
   <li role="presentation" class="active"><a href="#">Basket <span id="nav-basket" class="badge glyphicon glyphicon-shopping-cart">{{store.basketTotal | currency:'£'}}</span></a></li>
 
@@ -69,38 +49,54 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="alert" ng-show="store.errorMessage">
+<div class="row">
+<div class="col-sm-8 products">
+<div class="alert alert-danger" role="alert" ng-show="store.errorMessage">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <h3>Voucher not valid</h3>
 </div>
-<div class="alert" ng-show="store.voucherError">
+<div class="alert alert-danger" role="alert" ng-show="store.voucherError">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <h3>Voucher already used</h3>
 </div>
-<div class="row" ng-repeat="product in store.products">
- <div class="col-sm-6 col-md-4">
+
+<div class="col-sm-6 col-md-4" ng-repeat="product in store.products">
     <div class="thumbnail">
-      <img ng-src="{{ product.image }}">
+      <img class="image" ng-src="{{ product.image }}">
         <div class="caption">
           <h3 id="name">{{ product.name }}</h3>
           <p id="price">{{ product.price | currency:'£' }}</p>
           <p id="category">{{ product.category }}</p>
-          <p><a href="#" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a>
+          <p><a href="#" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a></p>
       </div>
     </div>
   </div>
 </div>
-
-      <!-- <button class="remove" ng-click="store.removeFromBasket(product)">Remove</button> -->
-
+<div class="col-sm-4 basket">
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h4 class="">Basket</h4>
 </div>
-<div>
-  <h4>Basket</h4>
-  <ul>
-    <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
-    <li id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</li>
-    <button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button>
-    <button class="btn btn-default ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button>
-    <button class="btn btn-default fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button>
-  </ul>
+<div class="panel-body">
+<table class="table" id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">
+  <tr>
+  <td>{{ content.name }}</td>
+   <td><button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
+    <td id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</td>
+    </tr>
+    </table>
+    <ul>
+    <li><button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
+    <li><button class="btn btn-default ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
+    <li><button class="btn btn-default fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
+    </ul>
+
+
+
+  </table>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
