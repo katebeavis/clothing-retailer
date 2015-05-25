@@ -1,101 +1,78 @@
-app.controller('storeController', function() {
+app.controller('storeController', function($http) {
+  var shop = this;
+  $http.get('public/products/products.json')
+            .then(function(result) {
+              shop.products = result.data;
+            });
 
-  var items = [
-    { name: 'Almond Toe Court Shoes, Patent Black', category: 'Women\'s Footwear', price: 99.00, stock: 5, inStock: true },
-    { name: 'Suede Shoes, Blue', category: 'Women\'s Footwear', price: 42.00, stock: 4, inStock: true },
-    { name: 'Leather Driver Saddle Loafers, Tan', category: 'Men\'s Footwear', price: 34.00, stock: 12, inStock: true },
-    { name: 'Flip Flops, Red', category: 'Men\'s Footwear', price: 219.00, stock: 6, inStock: true },
-    { name: 'Flip Flops, Blue', category: 'Men\'s Footwear', price: 19.00, stock: 0, inStock: false, soldOut: true },
-    { name: 'Gold Button Cardigan, Black', category: 'Women\'s Casualwear', price: 167.00, stock: 6, inStock: true },
-    { name: 'Cotton Shorts, Medium Red', category: 'Women\'s Casualwear', price: 30.00, stock: 5, inStock: true },
-    { name: 'Fine Stripe Short Sleeve Shirt, Grey', category: 'Men\'s Casualwear', price: 49.99, stock: 9, inStock: true },
-    { name: 'Fine Stripe Short Sleeve Shirt, Green', category: 'Men\'s Casualwear', price: 39.99, stock: 3, inStock: true },
-    { name: 'Sharkskin Waistcoat, Charcoal', category: 'Men\'s Casualwear', price: 75.00, stock: 2, inStock: true },
-    { name: 'Lightweight Patch Pocket Blazer, Deer', category: 'Men\'s Casualwear', price: 175.00, stock: 1, inStock: true },
-    { name: 'Bird Print Dress, Black', category: 'Women\'s Casualwear', price: 270.00, stock: 10, inStock: true },
-    { name: 'Mid Twist Cut-Out Dress, Pink', category: 'Women\'s Casualwear', price: 540.00, stock: 5, inStock: true }
-  ];
-
-  this.products = items;
-  this.basket = [];
-  this.basketTotal = 0;
+  shop.basket = [];
+  shop.basketTotal = 0;
   var fiveVoucherMinSpend = 5;
   var tenVoucherSpend = 50;
-  this.errorMessage = false;
-  this.voucherError = false;
-  this.voucherApplied = false;
+  shop.errorMessage = false;
+  shop.voucherError = false;
+  shop.voucherApplied = false;
 
-  this.addToBasket = function(item) {
+  shop.addToBasket = function(item) {
     if (item.inStock === true) {
-    this.basket.push(item);
-    this.basketTotal = this.currentbasketTotal();
+    shop.basket.push(item);
+    shop.basketTotal = shop.currentbasketTotal();
     }
   };
 
-  this.currentbasketTotal = function() {
-    return this.basket.map(function(item) {
+  shop.currentbasketTotal = function() {
+    return shop.basket.map(function(item) {
       return (item.price);
     }).reduce(function(a, b) {
       return a + b;
     });
   };
 
-  this.applyFiveVoucher = function(basketTotal) {
+  shop.applyFiveVoucher = function(basketTotal) {
     if (basketTotal < fiveVoucherMinSpend) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+      shop.errorMessage = true;
+    } else if (shop.voucherApplied === true) {
+      shop.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 5;
-      this.voucherApplied = true;
+      shop.basketTotal = basketTotal - 5;
+      shop.voucherApplied = true;
     }
   };
 
-  this.applyTenVoucher = function(basketTotal) {
+  shop.applyTenVoucher = function(basketTotal) {
     if (basketTotal <= tenVoucherSpend) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+      shop.errorMessage = true;
+    } else if (shop.voucherApplied === true) {
+      shop.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 10;
-      this.voucherApplied = true;
+      shop.basketTotal = basketTotal - 10;
+      shop.voucherApplied = true;
     }
   };
 
-  this.applyFifteenVoucher = function(basketTotal) {
-    if (basketTotal <= 75 || this.hasFootwear()) {
-      this.errorMessage = true;
-    } else if (this.voucherApplied === true) {
-      this.voucherError = true;
+  shop.applyFifteenVoucher = function(basketTotal) {
+    if (basketTotal <= 75 || shop.hasFootwear()) {
+      shop.errorMessage = true;
+    } else if (shop.voucherApplied === true) {
+      shop.voucherError = true;
     } else {
-      this.basketTotal = basketTotal - 15;
-      this.voucherApplied = true;
+      shop.basketTotal = basketTotal - 15;
+      shop.voucherApplied = true;
     }
   };
 
-  this.hasFootwear = function() {
-   if (this.itemCategory().indexOf('Footwear') > -1) {
+  shop.hasFootwear = function() {
+   if (shop.itemCategory().indexOf('Footwear') > -1) {
     return false;
    } else {
     return true;
    }
   };
 
-  this.itemCategory = function() {
-    return (this.basket.map(function(item) {
+  shop.itemCategory = function() {
+    return (shop.basket.map(function(item) {
       return (item.category.split(' ').pop());
     }));
   };
 
 });
-
-
-
-
-
-
-
-
-
-
-
