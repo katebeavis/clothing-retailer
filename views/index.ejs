@@ -75,21 +75,22 @@
 <div class="alert" ng-show="store.voucherError">
   <h3>Voucher already used</h3>
 </div>
-<div class="panel panel-default">
-  <table class="table table-bordered table-hover">
-    <tr>
-      <th>Item</th>
-      <th>Price<a ng-click="predicate = 'price'; reverse">%</a><a ng-click="predicate = 'price'; reverse=!reverse">^</a></th>
-      <th>Category</th>
-    </tr>
-    <tr id="clothing" ng-repeat="product in store.products |  orderBy:predicate:reverse">
-      <td id="name">{{ product.name }}</td>
-      <td id="price">{{ product.price | currency:'£' }}</td>
-      <td id="category">{{ product.category }}</td>
-      <td><button class="add" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</button><button ng-show="product.soldOut">Sold out</button>
-      <button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
-    </tr>
-  </table>
+<div class="row" ng-repeat="product in store.products">
+ <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img ng-src="{{ product.image }}">
+        <div class="caption">
+          <h3 id="name">{{ product.name }}</h3>
+          <p id="price">{{ product.price | currency:'£' }}</p>
+          <p id="category">{{ product.category }}</p>
+          <p><a href="#" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- <button class="remove" ng-click="store.removeFromBasket(product)">Remove</button> -->
+
 </div>
 <div>
   <h4>Basket</h4>
