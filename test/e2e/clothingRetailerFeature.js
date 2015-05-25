@@ -62,6 +62,16 @@ describe('Store', function() {
     expect(element(by.id('basket-contents')).getText()).toEqual('Cotton Shorts, Medium Red');
   });
 
+  it('lets a user remove an item from the basket', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    element.all(by.css('.remove')).getText()
+    .click();
+    expect(element(by.id('basket-contents')).isPresent()).toEqual(false);
+  });
+
+  expect(element(by.id('basket-total')).getText()).toEqual('Total: £0.00');
+
   it('displays the correct basket total when an item has been added', function() {
     element.all(by.buttonText('Add to basket')).get(0)
     .click();
@@ -74,6 +84,14 @@ describe('Store', function() {
     element.all(by.buttonText('Add to basket')).get(1)
     .click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £129.00');
+  });
+
+  it('displays the correct basket total when an item has been removed', function() {
+    element.all(by.buttonText('Add to basket')).get(0)
+    .click();
+    element.all(by.css('.remove')).getText()
+    .click();
+    expect(element(by.id('basket-total')).getText()).toEqual('Total: £0.00');
   });
 
   // VOUCHERS

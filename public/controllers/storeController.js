@@ -25,7 +25,12 @@ app.controller('storeController', function($http) {
       return (item.price);
     }).reduce(function(a, b) {
       return a + b;
-    });
+    },0);
+  };
+
+  shop.removeFromBasket = function(item) {
+    shop.basket.pop(item);
+    shop.basketTotal = shop.currentbasketTotal();
   };
 
   shop.applyFiveVoucher = function(basketTotal) {

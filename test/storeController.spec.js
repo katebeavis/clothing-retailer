@@ -32,25 +32,6 @@ describe('storeController', function() {
                     };
     }));
 
-  xit('initialises with a list of items of clothing', function() {
-    expect(ctrl.products).toBeDefined();
-  });
-
-  it('has item names', function() {
-    expect(ctrl.itemOne.name).toEqual('Almond Toe Court Shoes, Patent Black');
-  });
-
-  it('has item prices', function() {
-    expect(ctrl.itemOne.price).toEqual(99.00);
-  });
-
-  it('has item categories', function() {
-    expect(ctrl.itemOne.category).toEqual('Women\'s Footwear');
-  });
-
-  it('has an in stock option', function() {
-    expect(ctrl.itemOne.inStock).toEqual(true);
-  });
 
   it('initialises with an empty basket', function() {
     expect(ctrl.basket).toEqual([]);
@@ -65,9 +46,21 @@ describe('storeController', function() {
     expect(ctrl.basket).toEqual([ctrl.itemOne]);
   });
 
-  it('can set the basket total to the correct amount', function() {
+  it('can remove an item from the basket', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.removeFromBasket(ctrl.itemOne);
+    expect(ctrl.basket).toEqual([]);
+  });
+
+  it('can set the basket total to the correct amount when adding items', function() {
     ctrl.addToBasket(ctrl.itemOne);
     expect(ctrl.basketTotal).toEqual(99.00);
+  });
+
+  it('can set the basket total to the correct amount when removing items', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.removeFromBasket(ctrl.itemOne);
+    expect(ctrl.basketTotal).toEqual(0);
   });
 
   it('can set the basket total to the correct amount when multiple items are added', function() {
