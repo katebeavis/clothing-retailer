@@ -24,8 +24,6 @@ app.controller('storeController', function() {
   this.errorMessage = false;
   this.voucherError = false;
   this.voucherApplied = false;
-  this.femaleFootwear = 'Women\'s Footwear';
-  this.maleFootwear = 'Men\'s Footwear';
 
   this.addToBasket = function(item) {
     if (item.inStock === true) {
@@ -45,10 +43,8 @@ app.controller('storeController', function() {
   this.applyFiveVoucher = function(basketTotal) {
     if (basketTotal < fiveVoucherMinSpend) {
       this.errorMessage = true;
-      throw new Error ();
     } else if (this.voucherApplied === true) {
       this.voucherError = true;
-      throw new Error ();
     } else {
       this.basketTotal = basketTotal - 5;
       this.voucherApplied = true;
@@ -58,10 +54,8 @@ app.controller('storeController', function() {
   this.applyTenVoucher = function(basketTotal) {
     if (basketTotal <= tenVoucherSpend) {
       this.errorMessage = true;
-      throw new Error ();
     } else if (this.voucherApplied === true) {
       this.voucherError = true;
-      throw new Error ();
     } else {
       this.basketTotal = basketTotal - 10;
       this.voucherApplied = true;
@@ -71,18 +65,12 @@ app.controller('storeController', function() {
   this.applyFifteenVoucher = function(basketTotal) {
     if (basketTotal <= 75 || this.hasFootwear()) {
       this.errorMessage = true;
-      throw new Error ();
     } else if (this.voucherApplied === true) {
-      throw new Error ();
+      this.voucherError = true;
     } else {
       this.basketTotal = basketTotal - 15;
       this.voucherApplied = true;
     }
-
-    console.log(this.hasFootwear());
-    console.log(this.itemCategory());
-
-
   };
 
   this.hasFootwear = function() {

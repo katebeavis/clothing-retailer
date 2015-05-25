@@ -84,17 +84,15 @@ describe('storeController', function() {
 
   it('cannot apply a £5 voucher if the total is not more than £5', function() {
     ctrl.addToBasket(ctrl.itemTest);
-    expect(function() {
-      ctrl.applyFiveVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyFiveVoucher(ctrl.basketTotal);
+    expect(ctrl.errorMessage).toEqual(true);
   });
 
   it('will only let a £5 voucher be applied once', function() {
     ctrl.addToBasket(ctrl.itemOne);
     ctrl.applyFiveVoucher(ctrl.basketTotal);
-    expect(function() {
-      ctrl.applyFiveVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyFiveVoucher(ctrl.basketTotal);
+    expect(ctrl.voucherError).toEqual(true);
   });
 
   it('can apply a £10 voucher when more than £50 has been spent', function() {
@@ -105,17 +103,15 @@ describe('storeController', function() {
 
   it('cannot apply a £10 voucher if the total is not more than £50', function() {
     ctrl.addToBasket(ctrl.itemTwo);
-    expect(function() {
-      ctrl.applyTenVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyTenVoucher(ctrl.basketTotal);
+    expect(ctrl.errorMessage).toEqual(true);
   });
 
   it('will only let a £10 voucher be applied once', function() {
     ctrl.addToBasket(ctrl.itemOne);
     ctrl.applyTenVoucher(ctrl.basketTotal);
-    expect(function() {
-      ctrl.applyTenVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyTenVoucher(ctrl.basketTotal);
+    expect(ctrl.voucherError).toEqual(true);
   });
 
   it('can apply a £15 voucher to the order', function() {
@@ -126,16 +122,21 @@ describe('storeController', function() {
 
   it('cannot apply a £15 voucher if the total is not more than £75', function() {
     ctrl.addToBasket(ctrl.itemThree);
-    expect(function() {
-      ctrl.applyFifteenVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    expect(ctrl.errorMessage).toEqual(true);
   });
 
   it('cannot apply a £15 voucher if the category is not footwear', function() {
     ctrl.addToBasket(ctrl.itemThree);
     ctrl.addToBasket(ctrl.itemFour);
-    expect(function() {
-      ctrl.applyFifteenVoucher(ctrl.basketTotal);
-    }).toThrow(new Error());
+    ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    expect(ctrl.errorMessage).toEqual(true);
+  });
+
+  it('will only let a £15 voucher be applied once', function() {
+    ctrl.addToBasket(ctrl.itemOne);
+    ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    ctrl.applyFifteenVoucher(ctrl.basketTotal);
+    expect(ctrl.voucherError).toEqual(true);
   });
 });

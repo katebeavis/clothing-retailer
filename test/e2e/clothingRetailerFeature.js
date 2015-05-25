@@ -133,4 +133,10 @@ describe('Store', function() {
     .click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £84.00');
   });
+
+  it('displays an error when £15 minimum spend criteria has not been met', function() {
+    element.all(by.buttonText('£15.00 voucher'))
+    .click();
+    expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
+  });
 });
