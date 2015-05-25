@@ -99,22 +99,22 @@ describe('storeController', function() {
 
   it('can apply a £10 voucher when more than £50 has been spent', function() {
     ctrl.addToBasket(ctrl.itemOne);
-    ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    ctrl.applyTenVoucher(ctrl.basketTotal);
     expect(ctrl.basketTotal).toEqual(89.00);
   });
 
   it('cannot apply a £10 voucher if the total is not more than £50', function() {
     ctrl.addToBasket(ctrl.itemTwo);
     expect(function() {
-      ctrl.applyFiftyVoucher(ctrl.basketTotal);
+      ctrl.applyTenVoucher(ctrl.basketTotal);
     }).toThrow(new Error());
   });
 
   it('will only let a £10 voucher be applied once', function() {
     ctrl.addToBasket(ctrl.itemOne);
-    ctrl.applyFiftyVoucher(ctrl.basketTotal);
+    ctrl.applyTenVoucher(ctrl.basketTotal);
     expect(function() {
-      ctrl.applyFiftyVoucher(ctrl.basketTotal);
+      ctrl.applyTenVoucher(ctrl.basketTotal);
     }).toThrow(new Error());
   });
 

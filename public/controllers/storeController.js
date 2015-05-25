@@ -55,7 +55,7 @@ app.controller('storeController', function() {
     }
   };
 
-  this.applyFiftyVoucher = function(basketTotal) {
+  this.applyTenVoucher = function(basketTotal) {
     if (basketTotal <= tenVoucherSpend) {
       this.errorMessage = true;
       throw new Error ();
@@ -98,13 +98,6 @@ app.controller('storeController', function() {
       return (item.category.split(' ').pop());
     }));
   };
-
-  // this.hasFootwear = function() {
-  //   if (this.basket.map(function(item) {
-  //     return (item.category).indexOf(this.allowedCategories) == <1;
-  //   }));
-  //     console.log(this.hasFootwear());
-  // };
 
 });
 

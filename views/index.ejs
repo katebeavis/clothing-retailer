@@ -96,7 +96,7 @@
     <li id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">{{ content.name }}</li>
     <li id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</li>
     <button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button>
-    <button class="btn btn-default fifty-voucher" ng-click="store.applyFiftyVoucher(store.basketTotal)">£10.00 voucher</button>
+    <button class="btn btn-default ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button>
     <button class="btn btn-default fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button>
   </ul>
 </div>
