@@ -67,6 +67,7 @@
           <h3 id="name">{{ product.name }}</h3>
           <p id="price">{{ product.price | currency:'£' }}</p>
           <p id="category">{{ product.category }}</p>
+          <strong ng-hide="product.inStock">Sold out</strong>
           <p><a href="#" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a></p>
       </div>
     </div>
@@ -76,19 +77,23 @@
 <div class="panel panel-default">
   <div class="panel-heading">
   <h4 class="">Basket</h4>
+  <p id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</p>
 </div>
 <div class="panel-body">
 <table class="table" id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">
   <tr>
   <td>{{ content.name }}</td>
+  </tr>
+  <tr>
+  <td>{{ content.price | currency:'£' }}</td>
+  </tr>
    <td><button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
-    <td id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</td>
-    </tr>
+
     </table>
     <ul>
-    <li><button class="btn btn-default five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
-    <li><button class="btn btn-default ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
-    <li><button class="btn btn-default fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
+    <li><button class="btn btn-success five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
+    <li><button class="btn btn-success ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
+    <li><button class="btn btn-success fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
     </ul>
 
 

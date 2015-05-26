@@ -12,6 +12,13 @@ app.controller('storeController', function($http) {
   shop.errorMessage = false;
   shop.voucherError = false;
   shop.voucherApplied = false;
+  shop.displayVouchers = false;
+
+  checkBasket = function() {
+    if (shop.basket != nil) {
+      shop.displayVouchers = true;
+    }
+  };
 
   shop.addToBasket = function(item) {
     if (item.inStock === true) {
