@@ -15,7 +15,7 @@ describe('Store', function() {
   });
 
   it ('displays the name of the items', function() {
-    expect(element.all(by.id('name')).get(0).getText()).toEqual('Almond Toe Court Shoes, Patent Black');
+    expect(element.all(by.id('name')).get(0).getText()).toEqual('Almond Toe Court Shoes');
   });
 
   it ('displays the price of the items', function() {
