@@ -39,7 +39,7 @@ $ grunt (To run all tests)
 $ karma start test/karma.conf.js (To run just unit tests)
 $ protractor test/e2e/conf.js (To run just Protractor tests)
 ```
-You must have the server runnning to run grunt/protractor tests
+You must have the server running to run grunt/protractor tests
 
 ##Technologies Used
 - Angular JS
