@@ -1,7 +1,13 @@
 describe('Store', function() {
+
   beforeEach(function() {
+
     browser.get('http://localhost:3000');
     addButton = element.all(by.css('.add')).get(0);
+    removeButton = element.all(by.css('.remove')).getText();
+    applyFiveVoucher = element.all(by.buttonText('£5.00 voucher'));
+    applyTenVoucher = element(by.buttonText('£10.00 voucher'));
+    applyFifteenVoucher = element(by.buttonText('£15.00 voucher'));
   });
 
   it ('has a title', function() {
@@ -45,7 +51,7 @@ describe('Store', function() {
 
   it('lets a user remove an item from the basket', function() {
     addButton.click();
-    element.all(by.css('.remove')).getText().click();
+    removeButton.click();
     expect(element(by.id('basket-contents')).isPresent()).toEqual(false);
   });
 
@@ -70,48 +76,48 @@ describe('Store', function() {
 
   it('displays the correct total after a £5 voucher has been applied', function() {
     addButton.click();
-    element(by.buttonText('£5.00 voucher')).click();
+    applyFiveVoucher.click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £94.00');
   });
 
   it('displays an error when £5 minimum spend criteria has not been met', function() {
-    element.all(by.buttonText('£5.00 voucher')).click();
+    applyFiveVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });
 
   it('displays an error when £5 voucher has been used', function() {
     addButton.click();
-    element(by.buttonText('£5.00 voucher')).click();
-    element(by.buttonText('£5.00 voucher')).click();
+    applyFiveVoucher.click();
+    applyFiveVoucher.click();
     expect(element.all(by.css('div.alert')).get(1).isDisplayed()).toBeTruthy();
   });
 
   it('displays the correct total after a £10 voucher has been applied', function() {
     addButton.click();
-    element(by.buttonText('£10.00 voucher')).click();
+    applyTenVoucher.click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £89.00');
   });
 
   it('displays an error when £10 minimum spend criteria has not been met', function() {
-    element.all(by.buttonText('£10.00 voucher')).click();
+    applyTenVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });
 
   it('displays an error when £10 voucher has been used', function() {
     element.all(by.css('.add')).get(1).click();
-    element(by.buttonText('£10.00 voucher')).click();
-    element(by.buttonText('£10.00 voucher')).click();
+    applyTenVoucher.click();
+    applyTenVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });
 
   it('displays the correct total after a £15 voucher has been applied', function() {
     addButton.click();
-    element(by.buttonText('£15.00 voucher')).click();
+    applyFifteenVoucher.click();
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £84.00');
   });
 
   it('displays an error when £15 minimum spend criteria has not been met', function() {
-    element.all(by.buttonText('£15.00 voucher')).click();
+    applyFifteenVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });
 });
