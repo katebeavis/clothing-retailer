@@ -80,11 +80,6 @@ describe('Store', function() {
     expect(element(by.id('basket-total')).getText()).toEqual('Total: £94.00');
   });
 
-  it('displays an error when £5 minimum spend criteria has not been met', function() {
-    applyFiveVoucher.click();
-    expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
-  });
-
   it('displays an error when £5 voucher has been used', function() {
     addButton.click();
     applyFiveVoucher.click();
@@ -99,6 +94,7 @@ describe('Store', function() {
   });
 
   it('displays an error when £10 minimum spend criteria has not been met', function() {
+    element.all(by.css('.add')).get(1).click();
     applyTenVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });
@@ -117,6 +113,7 @@ describe('Store', function() {
   });
 
   it('displays an error when £15 minimum spend criteria has not been met', function() {
+    element.all(by.css('.add')).get(1).click();
     applyFifteenVoucher.click();
     expect(element.all(by.css('div.alert')).get(0).isDisplayed()).toBeTruthy();
   });

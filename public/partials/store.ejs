@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-8 products">
+    <div class="alert alert-danger" role="alert" ng-show="store.errorMessage">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Voucher not valid</h3>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="store.voucherError">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Voucher already used</h3>
+    </div>
+    <div class="col-sm-6 col-md-4" ng-repeat="product in store.products | filter:search">
+      <div class="thumbnail">
+        <img class="image" ng-src="{{ product.image }}">
+          <div class="caption">
+            <h3 id="name">{{ product.name }}</h3>
+            <p id="price">{{ product.price | currency:'£' }}</p>
+            <p id="category">{{ product.category }}</p>
+            <strong ng-hide="product.inStock">Sold out</strong>
+            <p><a href="" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 basket">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="">Basket</h4>
+        <p id="basket-total">Total: {{ store.basketTotal | currency:'£' }}</p>
+      </div>
+      <div class="panel-body">
+        <table class="table" id="basket-contents" ng-repeat="(index, content) in store.basket track by $index">
+          <tr>
+            <td>{{ content.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ content.price | currency:'£' }}</td>
+          </tr>
+          <td><button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
+        </table>
+        <ul ng-show="store.displayVouchers">
+          <li><button class="btn btn-success five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
+          <li><button class="btn btn-success ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
+          <li><button class="btn btn-success fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
