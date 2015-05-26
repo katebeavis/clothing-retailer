@@ -2,7 +2,7 @@
 A responsive website singe page web app created for a clothing retailer. The retailer sells six different categories of clothes: women’s footwear, men’s footwear, women’s casualwear, men’s casualwear, women’s formalwear and men’s formalwear.
 
 <div align="center">
-  <img width="90%" src="public/images/ang-store">
+  <img width="90%" src="public/imgs/ang-store">
 </div>
 
 ##Features
