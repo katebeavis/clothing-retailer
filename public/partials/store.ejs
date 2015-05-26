@@ -12,8 +12,9 @@
       <div class="thumbnail">
         <img class="image" ng-src="{{ product.image }}">
           <div class="caption">
-            <h3 id="name">{{ product.name }}</h3>
-            <p id="price">{{ product.price | currency:'£' }}</p>
+            <h4 id="name">{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <strong id="price">{{ product.price | currency:'£' }}</strong>
             <p id="category">{{ product.category }}</p>
             <p>Stock: {{ product.stock }}</p>
             <strong ng-hide="product.inStock">Sold out</strong>
@@ -39,6 +40,7 @@
           <td><button class="remove btn btn-danger" ng-click="store.removeFromBasket(product)">Remove</button></td>
         </table>
         <ul ng-show="store.displayVouchers">
+        <strong>Vouchers:</strong>
           <li><button class="btn btn-success five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
           <li><button class="btn btn-success ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
           <li><button class="btn btn-success fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
