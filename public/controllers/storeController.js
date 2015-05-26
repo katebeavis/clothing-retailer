@@ -11,19 +11,20 @@ app.controller('storeController', function($http) {
   var tenVoucherSpend = 50;
   shop.errorMessage = false;
   shop.voucherError = false;
-  shop.voucherApplied = false;
+  shop.FiveVoucherApplied = false;
+  shop.TenVoucherApplied = false;
+  shop.FifteenVoucherApplied = false;
   shop.displayVouchers = false;
 
-  checkBasket = function() {
-    if (shop.basket != nil) {
+  shop.checkBasket = function() {
       shop.displayVouchers = true;
-    }
   };
 
   shop.addToBasket = function(item) {
     if (item.inStock === true) {
     shop.basket.push(item);
     shop.basketTotal = shop.currentbasketTotal();
+    shop.checkBasket();
     }
   };
 
@@ -43,33 +44,33 @@ app.controller('storeController', function($http) {
   shop.applyFiveVoucher = function(basketTotal) {
     if (basketTotal < fiveVoucherMinSpend) {
       shop.errorMessage = true;
-    } else if (shop.voucherApplied === true) {
+    } else if (shop.FiveVoucherApplied === true) {
       shop.voucherError = true;
     } else {
       shop.basketTotal = basketTotal - 5;
-      shop.voucherApplied = true;
+      shop.FiveVoucherApplied = true;
     }
   };
 
   shop.applyTenVoucher = function(basketTotal) {
     if (basketTotal <= tenVoucherSpend) {
       shop.errorMessage = true;
-    } else if (shop.voucherApplied === true) {
+    } else if (shop.TenVoucherApplied === true) {
       shop.voucherError = true;
     } else {
       shop.basketTotal = basketTotal - 10;
-      shop.voucherApplied = true;
+      shop.TenVoucherApplied = true;
     }
   };
 
   shop.applyFifteenVoucher = function(basketTotal) {
     if (basketTotal <= 75 || shop.hasFootwear()) {
       shop.errorMessage = true;
-    } else if (shop.voucherApplied === true) {
+    } else if (shop.FifteenVoucherApplied === true) {
       shop.voucherError = true;
     } else {
       shop.basketTotal = basketTotal - 15;
-      shop.voucherApplied = true;
+      shop.FifteenVoucherApplied = true;
     }
   };
 

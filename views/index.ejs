@@ -34,7 +34,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" ng-model="search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
@@ -60,7 +60,7 @@
   <h3>Voucher already used</h3>
 </div>
 
-<div class="col-sm-6 col-md-4" ng-repeat="product in store.products">
+<div class="col-sm-6 col-md-4" ng-repeat="product in store.products | filter:search">
     <div class="thumbnail">
       <img class="image" ng-src="{{ product.image }}">
         <div class="caption">
@@ -90,7 +90,7 @@
    <td><button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
 
     </table>
-    <ul>
+    <ul ng-show="store.displayVouchers">
     <li><button class="btn btn-success five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
     <li><button class="btn btn-success ten-voucher" ng-click="store.applyTenVoucher(store.basketTotal)">£10.00 voucher</button></li>
     <li><button class="btn btn-success fifteen-voucher" ng-click="store.applyFifteenVoucher(store.basketTotal)">£15.00 voucher</button></li>
