@@ -8,7 +8,7 @@ A responsive website singe page web app created for a clothing retailer. The ret
 ##Features
 The following user stories have been implemented:
 
-- [x] As a User I can browse a list of products and see their relevant information - [x]such as availability and price.
+- [x] As a User I can browse a list of products and see their relevant information - such as availability and price.
 - [x] As a User I can add a product to my shopping cart.
 - [x] As a User I can remove a product from my shopping cart.
 - [x] As a User I can view the total price for the products in my shopping cart.
