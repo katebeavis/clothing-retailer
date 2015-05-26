@@ -89,5 +89,4 @@ app.controller('storeController', function($http) {
       return (item.category.split(' ').pop());
     }));
   };
-
 });

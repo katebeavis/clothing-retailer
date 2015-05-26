@@ -15,6 +15,7 @@
             <h3 id="name">{{ product.name }}</h3>
             <p id="price">{{ product.price | currency:'£' }}</p>
             <p id="category">{{ product.category }}</p>
+            <p>Stock: {{ product.stock }}</p>
             <strong ng-hide="product.inStock">Sold out</strong>
             <p><a href="" class="btn btn-primary add" role="button" ng-show="product.inStock" ng-click="store.addToBasket(product)">Add to basket</a></p>
           </div>
@@ -35,7 +36,7 @@
           <tr>
             <td>{{ content.price | currency:'£' }}</td>
           </tr>
-          <td><button class="remove" ng-click="store.removeFromBasket(product)">Remove</button></td>
+          <td><button class="remove btn btn-danger" ng-click="store.removeFromBasket(product)">Remove</button></td>
         </table>
         <ul ng-show="store.displayVouchers">
           <li><button class="btn btn-success five-voucher" ng-click="store.applyFiveVoucher(store.basketTotal)">£5.00 voucher</button></li>
